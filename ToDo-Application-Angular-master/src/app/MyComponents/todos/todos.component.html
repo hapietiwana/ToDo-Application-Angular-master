@@ -1,0 +1,15 @@
+<div class="container">
+    <h1 class="text-center mb-3 ">TodoList</h1>
+    <app-search></app-search>
+    <app-add-todo (todoAdd)="addTodo($event)" ></app-add-todo>
+    <h2 class="text-center">Your Todos</h2>
+    <div class="text-center mt-5" *ngIf="this.todos.length===0; else elseBlock">No Todos to display</div>
+    <ng-template #elseBlock>
+        <div class="mt-4" *ngFor="let todo of todos; index as i">
+            <div *ngIf="searchText===''|| todo.title.toString().includes(searchText)">
+                <app-item-todo [todo]="todo" [i]="i" (todoDelete)="deleteTodo($event)" (todoCheckBox)="toggleTodo($event)"></app-item-todo>
+                <hr/>
+            </div>
+        </div>
+    </ng-template>
+</div>
